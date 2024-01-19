@@ -47,6 +47,7 @@ const toggleTheme = () => {
 const runIntro = () => {
     const intro = document.querySelector("#Introduction");
     setTimeout(() => {
+        // Transition set it CSS 
         intro.style.opacity = 0;
         state_intro.set(1);
         setTimeout(() => {
@@ -61,7 +62,7 @@ onMount(() => {
     state_intro.subscribe((val) => {
         console.log(val);
     });
-    // run this only once. should be controlled by the store.
+    // run this only once. Controlled by the store.
     if (hasRun === 0) {
         runIntro();
     }
@@ -82,38 +83,20 @@ onMount(() => {
     <div class="frame-line frame-line-bottom"></div>
 </section>
 
-<nav>
+<nav class={currentTheme}>
     <div>
         <input type="checkbox" 
                checked={currentTheme !== THEMES.DARK} 
                on:click={toggleTheme}/>
     </div>
-	<a href="/">home</a>
-	<a href="/projects">projects</a>
+	<a href="/">ep</a>
+    <a href="/contact">contact</a>
 </nav>
 
 <slot></slot>
 
 <style>
-#Introduction {
-    position: fixed;
-    z-index: 1000;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    overflow: hidden;
-    will-change: opacity;
-    background-color: var(--bg-dark);
-    color: var(--c-text);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    column-gap: .5em;
-    font-size: 30px;
-    opacity: 1;
-    transition: opacity 1.5s ease;
-}
+
 
 /*media queries first, then everything else*/
 @media (prefers-color-scheme: dark) {
@@ -148,6 +131,26 @@ onMount(() => {
     backface-visibility: inherit;
 }
 
+#Introduction {
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    will-change: opacity;
+    background-color: var(--bg-dark);
+    color: var(--c-text);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    column-gap: .5em;
+    font-size: 30px;
+    opacity: 1;
+    transition: opacity 1.5s ease;
+}
+
 nav {
     z-index: 10;
     position: absolute;
@@ -157,6 +160,7 @@ nav {
     align-items: center;
     flex-wrap: nowrap;
     width: 100%;
+    max-width: 200px;
     height: 40px;
 }
 nav a {
@@ -187,7 +191,8 @@ nav a {
     left: 0;
     width: 100%;
     height: var(--pad);
-    /*background-color: black;*/ /*design me differently*/
+    /*read more about setting dynamic classes */
+    /*background-color: var(--bg-dark);*/ 
     transition-property: background-color;
     transition-duration: .9s;
     transition-timing-function: cubic-bezier(0.1, 0.4, 0.2, 1);
