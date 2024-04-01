@@ -4,3 +4,4 @@ pnpm-lock.yaml
 deploy.sh
 Cargo.lock
 dist/
+node_modules/
