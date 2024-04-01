@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@1/css/pico.min.css">
+    <title>EndePointe Hub</title>
+<style>
+    .world-canvas-container {
+        position: fixed;
+        top: -100%;left:0;right:0;
+        margin:auto;
+        z-index: 10;
+        width: 90%;
+        max-width: 100%;
+        height: 100%;
+        overflow: hidden;
+        transition: top 3s ease;
+        background-color: #141414;
+        display: flex; 
+        justify-content: center;
+        align-items: center;
+    }
+    #worldCanvas {
+    }
+    .nav-button {
+        background: none;
+        border: none;
+        color: inherit;
+        padding: 0;
+        cursor: pointer;
+    }
+    #inProgressBanner {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        background-color: rgba(0, 0, 0, 0.8);
+        color: white;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        z-index: 9999; 
+        transition: opacity 1s ease-out; 
+    }
+
+    #inProgressBanner.hide {
+        opacity: 0;
+        pointer-events: none;
+    }
+</style>
+</head>
+<body>
+    <nav class="container-fluid">
+        <ul>
+            <li><button class="nav-button" id="showWorldButton">🌐 Show World</button></li>
+            <li><strong>                
+                <hgroup>
+                    <h2>&lt;EP/&gt;</h2>
+                </hgroup>
+                </strong>
+            </li>
+        </ul>
+        <ul>
+            <li><a href="#">Home</a></li>
+            <li><a href="#">Latest News</a></li>
+            <li><a href="#">Tutorials</a></li>
+            <li><a href="#" role="button">Contact Me</a></li>
+        </ul>
+    </nav>
+
+    <!-- todo: nodes and intel -->
+    <div class="world-canvas-container" id="worldCanvasContainer">
+        <world-map id="world-map"></world-map>
+    </div>
+
+    <!--in progress banner -->
+    <div id="inProgressBanner">
+        <h1>Site in Development</h1>
+    </div>
+
+    <main class="container">
+        <div class="grid">
+            <section>
+                <hgroup>
+                    <h2>Welcome</h2>
+                    <h4>>>> nc -nlvp</h4>
+                </hgroup>
+                <p>Stay ahead of the curve with the latest news, trends, and tutorials in the cybersecurity. Explore in-depth articles, how-to guides, and insights designed to empower individuals and organizations to protect their digital assets.</p>
+                <figure>
+                    <img src="https://source.unsplash.com/featured/?cybersecurity" alt="Cybersecurity Concept" />
+                    <figcaption>Image Credit: Unsplash</figcaption>
+                </figure>
+                <h3>Latest News</h3>
+                <p>Get up-to-date information on cybersecurity threats, vulnerabilities, and breakthroughs. Understand the implications of the latest cyber incidents and learn how to safeguard your systems.</p>
+                <h3>Tutorials</h3>
+                <p>Whether you're a beginner or an experienced professional, I value the sharing of knowledge to enhance our skills.</p>
+            </section>
+        </div>
+    </main>
+    <section aria-label="Subscribe example">
+        <div class="container">
+            <article>
+                <hgroup>
+                    <h2>Stay Informed</h2>
+                    <h3>Subscribe to our newsletter</h3>
+                </hgroup>
+                <form class="grid">
+                    <input type="text" id="firstname" name="firstname" placeholder="Your Name" aria-label="Your Name" required />
+                    <input type="email" id="email" name="email" placeholder="Your Email" aria-label="Your Email" required />
+                    <button type="submit" onclick="event.preventDefault()">Subscribe</button>
+                </form>
+            </article>
+        </div>
+    </section>
+    <footer class="container">
+        <small>
+            <a href="#">Privacy Policy</a> • <a href="#">Terms of Service</a>
+        </small>
+    </footer>
+
+    <script>
+        const worldCanvasContainer = document.getElementById('worldCanvasContainer'); 
+        const showWorldButton = document.getElementById('showWorldButton');
+        document.addEventListener("DOMContentLoaded", function() {
+            var banner = document.getElementById('inProgressBanner');
+            setTimeout(function() {
+                banner.classList.add('hide');
+            }, 2000);
+        });
+
+        window.onload = function() {
+            var canvas = document.getElementById('worldCanvas');
+            if (canvas.getContext) {
+                var ctx = canvas.getContext('2d');
+                console.log("ctx:",ctx);
+            }
+        };
+        showWorldButton.addEventListener('click', () => {
+            worldCanvasContainer.style.top = '0';
+        });
+        worldCanvasContainer.addEventListener('mouseleave', () => {
+            worldCanvasContainer.style.top = '-100%';
+        });
+    </script>
+
+    <script src="dist/worldmap.bundle.js"></script>
+    <script src="dist/mapcontrol.bundle.js"></script>
+
+</body>
+</html>
+

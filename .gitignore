@@ -1,0 +1,6 @@
+target/
+pkg/
+pnpm-lock.yaml
+deploy.sh
+Cargo.lock
+dist/
