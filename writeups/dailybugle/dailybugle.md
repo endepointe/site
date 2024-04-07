@@ -15,16 +15,35 @@
 Provide a brief introduction to the topic of your write-up.
 
 ## Methodology
-Outline the methods and techniques used to conduct your analysis or investigation.
 
 <u>Recon:</u>
 
 ```nmap -sC -oN dailybugle.nmap ip.ad.dre.ss:```
 
-Under the http section, we can start looking at the paths specific to joomla that will give us the version info.
-https://docs.joomla.org/Administrator_(Application)
+![initial nmap scan](nmap-sC-scan.png)
 
-![Joomla manifest](joomla-manifest.png)
+Under the http-robots section, we can start gaining more information about the target by looking at all paths.
+
+The ```/administrator``` path gives us a Joomla backend login portal:
+
+![Joomla login portal](joomla-administrator.png)
+
+It is possible to find the version of Joomla in at least two different ways:
+
+1. following the rabbit-hole, starting at the administrator path: 
+
+    !{joomla sql update}(joomla-sql-update.png)
+
+2. searching for "how to find the version of a joomla website":
+
+    Credit: [itoctopus.com](https://www.itoctopus.com/how-to-quickly-know-the-version-of-any-joomla-website){:target="_blank"}.
+
+    !{itoctopus helper}(itoctopushelper.png)
+
+    ... led me to:
+
+    ![Joomla manifest](joomla-manifest.png)
+
 
 ## Results
 Present the results obtained from your analysis or investigation.
