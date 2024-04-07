@@ -42,7 +42,7 @@ It is possible to find the version of Joomla in at least two different ways:
 
 2. searching for "how to find the version of a joomla website":
 
-    Credit: [itoctopus.com](https://www.itoctopus.com/how-to-quickly-know-the-version-of-any-joomla-website){:target="_blank"}.
+    Credit: <a href="https://www.itoctopus.com/how-to-quickly-know-the-version-of-any-joomla-website" target="_blank">itoctopus.com</a>.
 
     ![itoctopus helper](itoctopushelper.png)
 
