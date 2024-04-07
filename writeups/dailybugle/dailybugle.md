@@ -32,13 +32,13 @@ It is possible to find the version of Joomla in at least two different ways:
 
 1. following the rabbit-hole, starting at the administrator path: 
 
-    !{joomla sql update}(joomla-sql-update.png)
+    ![joomla sql update](joomla-sql-update.png)
 
 2. searching for "how to find the version of a joomla website":
 
     Credit: [itoctopus.com](https://www.itoctopus.com/how-to-quickly-know-the-version-of-any-joomla-website){:target="_blank"}.
 
-    !{itoctopus helper}(itoctopushelper.png)
+    ![itoctopus helper](itoctopushelper.png)
 
     ... led me to:
 
