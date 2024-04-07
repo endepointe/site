@@ -49,6 +49,27 @@ It is possible to find the version of Joomla in at least two different ways:
 
     ![Joomla manifest](joomla-manifest.png)
 
+Performing a search about the known vulnerabilities of this version led me to the [Joomla Developer Network Security Announcements](https://developer.joomla.org/security-centre/692-20170501-core-sql-injection.html) which exposes an sql injection exploit, [CVE-2017-8917](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2017-8917).
+
+I tried sqlmap and a python script (after locating one):
+
+<u>sqlmap</u>
+
+...currently running....
+
+<u>python | credit: [stefanlucas](https://github.com/stefanlucas/Exploit-Joomla)</u>
+
+The initial run produced an error:
+
+![error](sqli-error.png)
+
+I assume that the author did this intentionally, for fun. After wrapping the datatype in a ```str```:
+
+![fix](sqli-str-fix.png)
+
+... we found success:
+
+![success](sqli-success.png)
 
 ## Results
 Present the results obtained from your analysis or investigation.

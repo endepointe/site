@@ -14,3 +14,9 @@ Todo:
 - cisco talos intelligence
 - virustotal
 
+## Pentesting
+- nmap
+- gobuster
+- sqlmap
+- metasploit
+- hydra
