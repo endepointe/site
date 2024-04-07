@@ -18,7 +18,7 @@ Provide a brief introduction to the topic of your write-up.
 
 <u>Recon:</u>
 
-```nmap -sC -oN dailybugle.nmap ip.ad.dre.ss:```
+```nmap -sC -oN dailybugle.nmap ip.add.re.ss:```
 
 ![initial nmap scan](nmap-sC-scan.png)
 
@@ -27,6 +27,12 @@ Under the http-robots section, we can start gaining more information about the t
 The ```/administrator``` path gives us a Joomla backend login portal:
 
 ![Joomla login portal](joomla-administrator.png)
+
+Ok, let's see what additional information is available at this path using ```gobuster```, replacing '-t COUNT' with the number of threads you wish to use:
+
+```gobuster dir -r -f ip.add.re.ss/administrator -t COUNT -w path/to/wordlist```
+
+![gobuster results](gobuster-results.png)
 
 It is possible to find the version of Joomla in at least two different ways:
 
