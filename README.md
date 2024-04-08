@@ -20,3 +20,9 @@ Todo:
 - sqlmap
 - metasploit
 - hydra
+
+## Hunting
+app.any.run
+
+## To Strive Towards
+https://www.paloaltonetworks.com/unit42/about
