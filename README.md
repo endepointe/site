@@ -21,6 +21,9 @@ Todo:
 - metasploit
 - hydra
 
+## Software
+- Cobalt Strike (https://attack.mitre.org/software/S0154/)
+
 ## Hunting
 app.any.run
 
