@@ -49,6 +49,10 @@ It is possible to find the version of Joomla in at least two different ways:
 
     ![Joomla manifest](joomla-manifest.png)
 
+3. if the exploit is known, search for the name in the ```/administrator/components/``` path:
+
+    ![com_field](com_fields.png)
+
 Performing a search about the known vulnerabilities of this version led me to the [Joomla Developer Network Security Announcements](https://developer.joomla.org/security-centre/692-20170501-core-sql-injection.html) which exposes an sql injection exploit, [CVE-2017-8917](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2017-8917).
 
 I tried sqlmap and a python script (after locating one):
