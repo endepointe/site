@@ -54,3 +54,4 @@ https://www.fireeye.com/current-threats/apt-groups.html
 
 ## ebpf
 https://kbknapp.dev/ebpf-part-i/index.html
+https://ebpf.io/case-studies/
