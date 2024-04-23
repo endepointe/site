@@ -55,3 +55,12 @@ https://www.fireeye.com/current-threats/apt-groups.html
 ## ebpf
 https://kbknapp.dev/ebpf-part-i/index.html
 https://ebpf.io/case-studies/
+
+## ML/AI
+https://www.darkreading.com/edge/theedge/ai-and-ml-are-cybersecurity-game-changers/a/d-id/1339646
+https://www.geeksforgeeks.org/gated-recurrent-unit-networks/
+https://towardsdatascience.com/transformers-141e32e69591
+https://www.geeksforgeeks.org/introduction-to-recurrent-neural-network/
+https://pytorch.org/tutorials/beginner/basics/intro.html
+https://arxiv.org/pdf/1606.02147.pdf
+https://arxiv.org/abs/1606.02147
