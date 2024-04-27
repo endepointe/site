@@ -8,6 +8,8 @@ Todo:
 
 
 # Resources:
+## Mitre
+https://engage.mitre.org/
 
 ## IP Lookups
 - abuseipdb
@@ -50,8 +52,6 @@ https://www.fireeye.com/current-threats/apt-groups.html
 - C2
 - Actions on Objectives
 
-
-
 ## ebpf
 https://kbknapp.dev/ebpf-part-i/index.html
 https://ebpf.io/case-studies/
@@ -64,3 +64,4 @@ https://www.geeksforgeeks.org/introduction-to-recurrent-neural-network/
 https://pytorch.org/tutorials/beginner/basics/intro.html
 https://arxiv.org/pdf/1606.02147.pdf
 https://arxiv.org/abs/1606.02147
+
