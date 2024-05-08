@@ -22,6 +22,7 @@ https://engage.mitre.org/
 - sqlmap
 - metasploit
 - hydra
+- poshc2
 
 ## Software
 - Cobalt Strike (https://attack.mitre.org/software/S0154/)
