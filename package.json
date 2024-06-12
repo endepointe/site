@@ -5,7 +5,9 @@
         "wpp": "webpack --mode=production"
     },
     "dependencies": {
-        "gsap": "^3.12.5"
+        "graphology": "^0.25.4",
+        "gsap": "^3.12.5",
+        "sigma": "3.0.0-beta.19"
     },
     "devDependencies": {
         "@babel/core": "^7.24.3",

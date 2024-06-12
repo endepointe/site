@@ -6,6 +6,7 @@ module.exports = {
     entry: {
         mapcontrol: './src/mapcontrol.js',
         worldmap: './src/worldmap.js',
+        graphctrl: './src/graphctrl.js',
     },
     module: {
         rules: [
