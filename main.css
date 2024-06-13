@@ -1,0 +1,43 @@
+.world-canvas-container {
+    position: fixed;
+    top: -100%;left:0;right:0;
+    margin:auto;
+    z-index: 10;
+    width: 90%;
+    max-width: 100%;
+    height: 100%;
+    overflow: hidden;
+    transition: top 800ms ease;
+    background-color: #141414;
+    display: flex; 
+    justify-content: center;
+    align-items: center;
+}
+#worldCanvas {
+}
+.nav-button {
+    background: none;
+    border: none;
+    color: inherit;
+    padding: 0;
+    cursor: pointer;
+}
+#inProgressBanner {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.8);
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999; 
+    transition: opacity 1s ease-out; 
+}
+#inProgressBanner.hide {
+    opacity: 0;
+    pointer-events: none;
+}
+#graph-container {}
