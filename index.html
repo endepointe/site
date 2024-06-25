@@ -6,25 +6,39 @@
 <title>EndePointe Hub</title>
 <link rel="stylesheet" href="css/custom.css">
 </head>
-<body class="bg-success">
-
-<nav class=""></nav>
-
-<!-- todo: nodes and intel -->
-<div class="world-canvas-container" id="worldCanvasContainer">
-    <world-map id="world-map"></world-map>
-</div>
+<body class="bg-dark">
 
 <!--in progress banner -->
 <div id="inProgressBanner">
     <h1>Site in Development</h1>
 </div>
 
-<footer class="container">
-    <small>
-        <a href="#">Privacy Policy</a> • <a href="#">Terms of Service</a>
-    </small>
-</footer>
+<!-- todo: nodes and intel -->
+<div class="world-canvas-container" id="worldCanvasContainer">
+    <world-map id="world-map"></world-map>
+</div>
+
+<nav class="position-absolute start-0 border border-primary">
+    navigation
+</nav>
+
+<main class="d-flex">
+
+    <!-- intro -->
+    <div class="d-flex">
+        <section class="border border-danger">
+            right side with hex
+        </section>
+    </div>
+    <!-- end intro -->
+
+    <footer class="position-absolute bottom-0 start-0 end-0">
+        <small>
+            <a href="#">Privacy Policy</a> • <a href="#">Terms of Service</a>
+        </small>
+    </footer>
+</main>
+
 
 <script>
     const worldCanvasContainer = document.getElementById('worldCanvasContainer'); 
