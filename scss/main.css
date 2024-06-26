@@ -41,3 +41,7 @@
     pointer-events: none;
 }
 #graph-container {}
+.test {
+    background-color: red;
+    color: white;
+} 

@@ -1,11 +1,7 @@
-@import "../node_modules/bootstrap/scss/bootstrap";
-
-// or include only parts of bootstrap
-/*
-@import "../node_modules/bootstrap/scss/functions";
-@import "../node_modules/bootstrap/scss/variables";
-@import "../node_modules/bootstrap/scss/mixins";
-*/
+@import "main.css";
+@import "test.scss";
+//@import "../node_modules/bootstrap/scss/bootstrap";
 
 // add custom code here
-@import "../main.css";
+
+

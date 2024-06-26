@@ -1,4 +1,7 @@
+'use strict';
 const path = require('path');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const autoprefixer = require('autoprefixer');
 const mode = 'development';
 const prod = mode === 'production';
 
@@ -8,6 +11,9 @@ module.exports = {
         worldmap: './src/worldmap.js',
         graphctrl: './src/graphctrl.js',
     },
+    plugins: [
+        new HtmlWebpackPlugin({template: './index.html'}),
+    ],
     module: {
         rules: [
             {
@@ -26,11 +32,18 @@ module.exports = {
                 }
             },
             {
-                test: /\.s[ac]ss$/i,
+                test: /\.(scss)$/,
                 use: [
-                    'style-loader',
-                    'css-loader',
-                    'sass-loader',
+                    {loader: 'style-loader'},
+                    {loader: 'css-loader'},
+                    {loader: 'postcss-loader', 
+                        options: {
+                            postcssOptions: {
+                                plugins: [autoprefixer]
+                            }
+                        }
+                    },
+                    {loader: 'sass-loader'},
                 ],
             },
         ],
