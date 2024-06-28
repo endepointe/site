@@ -9,25 +9,30 @@
 </head>
 <body class="bg-dark text-light">
 
-<nav class="position-absolute top-50 start-0">
-    <ul class="nav flex-column" id="slides">
-        <li class="nav-item">slide one</li>
-        <li class="nav-item">slide two</li>
-        <li class="nav-item">slide three</li>
+<nav class="position-absolute top-50 end-0 z-3">
+    <ul class="nav flex-column" id="slide-list-items">
+        <li class="nav-item" value="1">slide one</li>
+        <li class="nav-item" value="2">slide two</li>
+        <li class="nav-item" value="3">slide three</li>
     </ul>
 </nav>
 
-<main class="position-absolute op-0 tart-0 text-light test fw fh" 
+<main class="position-absolute top-0 start-0 justify-content-center text-light test fw fh" 
       > <!-- move into css file -->
     <!-- intro -->
-    <div class="d-flex">
+    <div class="container-sm test">
         <section class="slide">
-            left side with hex
+            one
         </section>
-        <section class="slide">
-            right side with hex
+        <section class="slide visually-hidden">
+            two
         </section>
-        <section class="slide"></section>
+        <section class="slide visually-hidden">
+            three
+        </section>
+        <section class="slide visually-hidden">
+            four
+        </section>
     </div>
     <!-- end intro -->
 </main>
