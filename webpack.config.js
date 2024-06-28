@@ -7,9 +7,10 @@ const prod = mode === 'production';
 
 module.exports = {
     entry: {
+        slidecontrol: './src/slidecontrol.js',
         mapcontrol: './src/mapcontrol.js',
         worldmap: './src/worldmap.js',
-        graphctrl: './src/graphctrl.js',
+        graphcontrol: './src/graphcontrol.js',
     },
     plugins: [
         new HtmlWebpackPlugin({template: './index.html'}),
@@ -30,6 +31,20 @@ module.exports = {
                         presets: ['@babel/preset-env']
                     }
                 }
+            },
+            {
+                test: /\.(css)$/,
+                use: [
+                    {loader: 'style-loader'},
+                    {
+                        loader: 'css-loader',
+                        options: {
+                            importLoaders: 1,
+                            modules: true,
+                        }
+
+                    },
+                ],
             },
             {
                 test: /\.(scss)$/,

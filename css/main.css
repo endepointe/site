@@ -1,5 +1,7 @@
+
+
 .world-canvas-container {
-    position: fixed;
+    position: absolute;/*fixed;*/
     top: -100%;left:0;right:0;
     margin:auto;
     z-index: 10;
@@ -15,6 +17,7 @@
 }
 #worldCanvas {
 }
+
 .nav-button {
     background: none;
     border: none;
@@ -41,7 +44,13 @@
     pointer-events: none;
 }
 #graph-container {}
+
 .test {
-    background-color: red;
-    color: white;
-} 
+    border: dashed #2cff00;
+}
+.fw {
+    width: 100vw;
+}
+.fh {
+    height: 100vh;
+}

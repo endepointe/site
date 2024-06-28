@@ -5,52 +5,61 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>EndePointe Hub</title>
 <link rel="stylesheet" href="./css/custom.css">
+<link rel="stylesheet" href="./css/main.css">
 </head>
-<body class="bg-dark">
+<body class="bg-dark text-light">
 
-<!--in progress banner -->
-<div id="inProgressBanner">
-    <h1>Site in Development</h1>
-</div>
+<nav class="position-absolute top-50 start-0">
+    <ul class="nav flex-column" id="slides">
+        <li class="nav-item">slide one</li>
+        <li class="nav-item">slide two</li>
+        <li class="nav-item">slide three</li>
+    </ul>
+</nav>
+
+<main class="position-absolute op-0 tart-0 text-light test fw fh" 
+      > <!-- move into css file -->
+    <!-- intro -->
+    <div class="d-flex">
+        <section class="slide">
+            left side with hex
+        </section>
+        <section class="slide">
+            right side with hex
+        </section>
+        <section class="slide"></section>
+    </div>
+    <!-- end intro -->
+</main>
+
+<footer class="position-absolute bottom-0 start-0 end-0">
+    <small>
+        <a href="#">Privacy Policy</a> • <a href="#">Terms of Service</a>
+    </small>
+</footer>
 
 <!-- todo: nodes and intel -->
 <div class="world-canvas-container" id="worldCanvasContainer">
     <world-map id="world-map"></world-map>
 </div>
 
-<nav class="position-absolute start-0">
-    navigation
-</nav>
+<!--in progress banner -->
+<div id="inProgressBanner" class="hide">
+    <h1>Site in Development</h1>
+</div>
 
-<main class="d-flex test">
-
-    <!-- intro -->
-    <div class="d-flex">
-        <section class="border border-primary">
-            left side with hex
-        </section>
-        <section class="test">
-            right side with hex
-        </section>
-    </div>
-    <!-- end intro -->
-
-    <footer class="position-absolute bottom-0 start-0 end-0">
-        <small>
-            <a href="#">Privacy Policy</a> • <a href="#">Terms of Service</a>
-        </small>
-    </footer>
-</main>
-
+<div id="graph-container" style="height: 100px;" class="visually-hidden"></div>
 
 <script>
+    /*
     const worldCanvasContainer = document.getElementById('worldCanvasContainer'); 
     const showWorldButton = document.getElementById('showWorldButton');
+
     document.addEventListener("DOMContentLoaded", function() {
         var banner = document.getElementById('inProgressBanner');
         setTimeout(function() {
             banner.classList.add('hide');
-        }, 1000);
+        }, 0);
     });
 
     window.onload = function() {
@@ -66,12 +75,13 @@
     worldCanvasContainer.addEventListener('mouseleave', () => {
         worldCanvasContainer.style.top = '-100%';
     });
-    
+    */ 
 </script>
 
+<script src="dist/slidecontrol.bundle.js"></script>
 <script src="dist/worldmap.bundle.js"></script>
 <script src="dist/mapcontrol.bundle.js"></script>
-<script src="dist/graphctrl.bundle.js"></script>
+<script src="dist/graphcontrol.bundle.js"></script>
 
 </body>
 </html>

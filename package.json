@@ -4,8 +4,8 @@
         "wpd": "webpack --mode=development --watch",
         "wpb": "webpack --mode=development",
         "wpp": "webpack --mode=production",
-        "sd": "sass ./scss/custom.scss ./css/custom.css --watch",
-        "sb": "sass ./scss/custom.scss ./css/custom.css"
+        "sd": "sass ./src/scss/custom.scss ./css/custom.css --watch",
+        "sb": "sass ./src/scss/custom.scss ./css/custom.css"
     },
     "dependencies": {
         "@popperjs/core": "^2.11.8",
