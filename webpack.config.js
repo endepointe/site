@@ -7,6 +7,8 @@ const prod = mode === 'production';
 
 module.exports = {
     entry: {
+        bsmain: './src/js/main.js',
+        mainmenucontrol: './src/mainmenucontrol.js',
         slidecontrol: './src/slidecontrol.js',
         mapcontrol: './src/mapcontrol.js',
         worldmap: './src/worldmap.js',

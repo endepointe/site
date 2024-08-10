@@ -9,7 +9,45 @@
 </head>
 <body class="bg-dark text-light">
 
-<nav class="position-absolute top-50 end-0 z-3">
+    <nav class="navbar navbar-expand-md test">
+        <a href="#" class="navbar-brand text-white">endepointe</a>
+        <button class="navbar-toggler" 
+            type="button" 
+            data-bs-toggle="collapse"
+            data-bs-target="#theIDbeingTargetted"
+            aria-controls="theNameWithout#ofIDbeingTargetted"
+            aria-expanded="false"
+            aria-label="Toggle main menu">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link active text-white" aria-current="page" href="#">Home</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link text-white" href="#">Link</a>
+                </li>
+
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle text-white" 
+                        role="button"
+                        data-bs-toggle="dropdown"
+                        aria-expanded="false"
+                        href="#">Dropdown</a>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href="#">Perform action here</a></li>
+                        <li><a class="dropdown-item" href="#">Perform another action here</a></li>
+                        <li><hr class="dropdown-divider"></li>
+                        <li><a class="dropdown-item" href="#">some item in the dropdown menu</a> </li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+<nav class="position-absolute top-50 end-0 z-3 visually-hidden">
     <h3>Projects</h3>
     <ul class="nav flex-column cursor" id="slide-list-items">
         <li class="nav-item">home</li>
@@ -20,11 +58,11 @@
 </nav>
 
 <main class="position-absolute top-0 start-0 justify-content-center text-light 
-      overflow-hidden test fw fh"> 
+      overflow-hidden test fw fh visually-hidden"> 
     <!-- intro -->
     <div class="container-sm test fh">
         <section class="slide row test">
-            <h1>start intro</h1>
+            <h1>start intro changed</h1>
         </section>
         <section class="slide row test visually-hidden">
             <h1>WatchLog</h1>
@@ -57,6 +95,7 @@
 <div id="graph-container" style="height: 100px;" class="visually-hidden"></div>
 
 <script>
+
     /*
     const worldCanvasContainer = document.getElementById('worldCanvasContainer'); 
     const showWorldButton = document.getElementById('showWorldButton');
@@ -84,6 +123,8 @@
     */ 
 </script>
 
+<script src="dist/bsmain.bundle.js"></script>
+<script src="dist/mainmenucontrol.bundle.js"></script>
 <script src="dist/slidecontrol.bundle.js"></script>
 <script src="dist/worldmap.bundle.js"></script>
 <script src="dist/mapcontrol.bundle.js"></script>
