@@ -8,8 +8,19 @@ Todo:
 
 
 # Resources:
-## Mitre
-https://engage.mitre.org/
+
+- Mitre
+    - https://engage.mitre.org/
+    - https://www.nist.gov/cybersecurity
+
+- NIST
+    - https://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-53r5.pdf
+
+- Infosec Management and Compliance
+    - ISO/IEC 27001 (https://www.iso.org/standard/27001)
+
+- SOC 2
+    - https://competance.com/course/soc2-course-essentials/
 
 ## IP Lookups
 - abuseipdb

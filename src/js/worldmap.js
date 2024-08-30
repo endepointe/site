@@ -1,4 +1,4 @@
-import html from './world-map.html';
+import html from '../svgs/world-map.html';
 // 2000 x 857
 class WorldMap extends HTMLElement {
     constructor() {

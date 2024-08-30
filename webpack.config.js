@@ -8,11 +8,11 @@ const prod = mode === 'production';
 module.exports = {
     entry: {
         bsmain: './src/js/main.js',
-        mainmenucontrol: './src/mainmenucontrol.js',
-        slidecontrol: './src/slidecontrol.js',
-        mapcontrol: './src/mapcontrol.js',
-        worldmap: './src/worldmap.js',
-        graphcontrol: './src/graphcontrol.js',
+        mainmenucontrol: './src/js/mainmenucontrol.js',
+        slidecontrol: './src/js/slidecontrol.js',
+        mapcontrol: './src/js/mapcontrol.js',
+        worldmap: './src/js/worldmap.js',
+        graphcontrol: './src/js/graphcontrol.js',
     },
     plugins: [
         new HtmlWebpackPlugin({template: './index.html'}),
