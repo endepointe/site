@@ -1,135 +1,39 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>EndePointe Hub</title>
-<link rel="stylesheet" href="./css/custom.css">
-<link rel="stylesheet" href="./css/main.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact | Your Name</title>
 </head>
-<body class="bg-dark text-light">
+<body>
+    <header id="contact"></header>
 
-    <nav class="navbar navbar-expand-md test">
-        <a href="#" class="navbar-brand text-white">endepointe</a>
-        <button class="navbar-toggler" 
-            type="button" 
-            data-bs-toggle="collapse"
-            data-bs-target="#theIDbeingTargetted"
-            aria-controls="theNameWithout#ofIDbeingTargetted"
-            aria-expanded="false"
-            aria-label="Toggle main menu">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse">
-            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                <li class="nav-item">
-                    <a class="nav-link active text-white" aria-current="page" href="#">Home</a>
-                </li>
-
-                <li class="nav-item">
-                    <a class="nav-link text-white" href="#">research SPF, DKIM, DMARC</a>
-                </li>
-
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle text-white" 
-                        role="button"
-                        data-bs-toggle="dropdown"
-                        aria-expanded="false"
-                        href="#">Dropdown</a>
-                    <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" href="#">Perform action here</a></li>
-                        <li><a class="dropdown-item" href="#">Perform another action here</a></li>
-                        <li><hr class="dropdown-divider"></li>
-                        <li><a class="dropdown-item" href="#">some item in the dropdown menu</a> </li>
-                    </ul>
-                </li>
-            </ul>
-        </div>
+    <nav>
+        <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="projects.html">Projects</a></li>
+            <li><a href="contact.html">Contact</a></li>
+        </ul>
     </nav>
 
-<nav class="position-absolute top-50 end-0 z-3 visually-hidden">
-    <h3>Projects</h3>
-    <ul class="nav flex-column cursor" id="slide-list-items">
-        <li class="nav-item">home</li>
-        <li class="nav-item link-light link-offset-2 link-underline-opacity-25 
-            link-underline-opacity-100-hover">WatchLog</li>
-        <li class="nav-item">ZeekGraph</li>
-    </ul>
-</nav>
-
-<main class="position-absolute top-0 start-0 justify-content-center text-light 
-      overflow-hidden test fw fh visually-hidden"> 
-    <!-- intro -->
-    <div class="container-sm test fh">
-        <section class="slide row test">
-            <h1>start intro changed</h1>
+    <main>
+        <section>
+            <h2>Get in Touch</h2>
+            <p>You can reach me via email or connect with me on LinkedIn.</p>
+            <ul>
+                <li>Email: your.email@example.com</li>
+                <li>LinkedIn: <a href="https://linkedin.com/in/yourusername">Your LinkedIn Profile</a></li>
+                <!-- Add other contact options as needed -->
+            </ul>
         </section>
-        <section class="slide row test visually-hidden">
-            <h1>WatchLog</h1>
-            <p>Written in <span><a href="https://www.rust-lang.org">Rust</a></span>, this on-going project aims to bring the power of eBPF to SMBs and individuals.</p>
-            <p>Learn more about the project at <span><a href="https://watchlog.wiki/" target="_blank" class="">WatchLog.wiki</a></span></p>
-        </section>
-        <section class="slide test visually-hidden">
-            ZeekGraph
-        </section>
-    </div>
-    <!-- end intro -->
-</main>
+    </main>
 
-<footer class="position-absolute bottom-0 start-0 end-0">
-    <small>
-        <a href="#">Privacy Policy</a> • <a href="#">Terms of Service</a>
-    </small>
-</footer>
+    <footer>
+        <p>&copy; 2024 Your Name</p>
+    </footer></body>
 
-<!-- todo: nodes and intel -->
-<div class="world-canvas-container" id="worldCanvasContainer">
-    <world-map id="world-map"></world-map>
-</div>
+    <script src="dist/index.bundle.js"></script>
 
-<!--in progress banner -->
-<div id="inProgressBanner" class="hide">
-    <h1>Site in Development</h1>
-</div>
-
-<div id="graph-container" style="height: 100px;" class="visually-hidden"></div>
-
-<script>
-
-    /*
-    const worldCanvasContainer = document.getElementById('worldCanvasContainer'); 
-    const showWorldButton = document.getElementById('showWorldButton');
-
-    document.addEventListener("DOMContentLoaded", function() {
-        var banner = document.getElementById('inProgressBanner');
-        setTimeout(function() {
-            banner.classList.add('hide');
-        }, 0);
-    });
-
-    window.onload = function() {
-        var canvas = document.getElementById('worldCanvas');
-        if (canvas.getContext) {
-            var ctx = canvas.getContext('2d');
-            console.log("ctx:",ctx);
-        }
-    };
-    showWorldButton.addEventListener('click', () => {
-        worldCanvasContainer.style.top = '0';
-    });
-    worldCanvasContainer.addEventListener('mouseleave', () => {
-        worldCanvasContainer.style.top = '-100%';
-    });
-    */ 
-</script>
-
-<script src="dist/bsmain.bundle.js"></script>
-<script src="dist/mainmenucontrol.bundle.js"></script>
-<script src="dist/slidecontrol.bundle.js"></script>
-<script src="dist/worldmap.bundle.js"></script>
-<script src="dist/mapcontrol.bundle.js"></script>
-<script src="dist/graphcontrol.bundle.js"></script>
-
-</body>
 </html>
 
