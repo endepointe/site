@@ -1,3 +1,8 @@
+# Web
+Author: @HuskyHacks
+
+Need a quick solution for archiving your business files? Try Zippy today, the Zip Archiver built for the small to medium business!
+
 # Image Sequence
 
 Below is a sequence of PNG images sorted by their timestamps. Each image is embedded in the order it was created.
