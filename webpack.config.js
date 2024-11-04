@@ -1,3 +1,4 @@
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 const path = require('path');
 
 module.exports = {
@@ -27,6 +28,11 @@ module.exports = {
             }
         ]
     },
+    plugins: [new HtmlWebpackPlugin(
+        {
+            template: "./index.html",
+        }
+    )],
     devServer: {
         static: {
             directory: path.join(__dirname, '/'),
