@@ -9,6 +9,7 @@
 		"reverse"
 	],
 	"scripts": {
+        "predeploy": "pnpm run build",
 		"build": "webpack",
 		"watch": "webpack serve",
 		"deploy": "gh-pages -d build"
