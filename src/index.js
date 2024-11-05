@@ -33,14 +33,17 @@ function Writeups()
         <div className="container my-4">
             <div className="row">
                 <nav className="col-12 col-md-3 sidebar left" role="tablist">
-                    <li className="nav-link active" id="nav-home-tab" type="button"
-                        data-bs-toggle="tab" data-bs-target="#nav-home" 
-                        role="tab" aria-controls="nav-home" aria-selected="true">Home</li>
+                    <h5>Huntress 2024</h5>
+                    <ul>
+                        <li className="nav-link active" id="nav-home-tab" type="button"
+                            data-bs-toggle="tab" data-bs-target="#nav-home" 
+                            role="tab" aria-controls="nav-home" aria-selected="true">Knights Quest</li>
+                    </ul>
 
                     <li className="nav-link" id="nav-profile-tab" type="button" 
                         data-bs-toggle="tab" data-bs-target="#nav-profile" 
                         role="tab" aria-controls="nav-home" aria-selected="false">profile</li>
-
+                    <li><hr className="dropdown-divider" /></li>
                     <li className="nav-link" id="nav-contact-tab" type="button" 
                         data-bs-toggle="tab" data-bs-target="#nav-contact" 
                         role="tab" aria-controls="nav-contact" aria-selected="false">contact</li>
