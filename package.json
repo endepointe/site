@@ -9,10 +9,10 @@
 		"reverse"
 	],
 	"scripts": {
-        "predeploy": "pnpm run build",
+		"predeploy": "pnpm run build",
 		"build": "webpack",
-		"watch": "webpack serve",
-		"deploy": "gh-pages -d build"
+		"watch": "webpack --watch",
+		"deploy-yes": "gh-pages -d build"
 	},
 	"devDependencies": {
 		"@babel/core": "^7.26.0",
@@ -21,8 +21,7 @@
 		"babel-loader": "^9.2.1",
 		"html-webpack-plugin": "^5.6.3",
 		"webpack": "^5.96.1",
-		"webpack-cli": "^5.1.4",
-		"webpack-dev-server": "^5.1.0"
+		"webpack-cli": "^5.1.4"
 	},
 	"dependencies": {
 		"gh-pages": "^6.2.0",

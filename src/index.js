@@ -13,15 +13,14 @@ function Navigation()
 {
     return (
         <nav className="container text-center">
-            <ul className="nav nav-tabs" id="navTabs" role="tablist">
-                <li className="nav-item" role="presentation">
+            <ul className="nav nav-tabs" id="navTabs" role="tablist"> <li className="nav-item" role="presentation">
                     <Link className="nav-link" to="/">Home</Link>
                 </li>
                 <li className="nav-item">
                     <Link className="nav-link" to="/writeups">Writeups</Link>
                 </li>
                 <li className="nav-item">
-                    <Link className="nav-link" to="/other">Other</Link>
+                    <Link className="nav-link" to="/other">Oher</Link>
                 </li>
             </ul>
         </nav>
@@ -31,25 +30,39 @@ function Navigation()
 function Writeups()
 {
     return (
-        <div className="d-flex flex-row">
-            <nav className="nav flex-column">
-                <li className="nav-link active" id="nav-home-tab" data-bs-toggle="tab" data-bs-target="#nav-home" type="button" role="tab" aria-controls="nav-home" aria-selected="true">Home</li>
-                <button className="nav-link" id="nav-profile-tab" data-bs-toggle="tab" data-bs-target="#nav-profile" type="button" role="tab" aria-controls="nav-profile" aria-selected="false">Profile</button>
-                <button className="nav-link" id="nav-contact-tab" data-bs-toggle="tab" data-bs-target="#nav-contact" type="button" role="tab" aria-controls="nav-contact" aria-selected="false">Contact</button>
-                <button className="nav-link" id="nav-disabled-tab" data-bs-toggle="tab" data-bs-target="#nav-disabled" type="button" role="tab" aria-controls="nav-disabled" aria-selected="false" disabled>Disabled</button>
-            </nav>
-            <div className="tab-content" id="nav-tabContent">
-                <div className="tab-pane fade show active" 
-                    id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab" tabindex="0">
-                    nav home
+        <div className="container my-4">
+            <div className="row">
+                <nav className="col-12 col-md-3 sidebar left" role="tablist">
+                    <li className="nav-link active" id="nav-home-tab" type="button"
+                        data-bs-toggle="tab" data-bs-target="#nav-home" 
+                        role="tab" aria-controls="nav-home" aria-selected="true">Home</li>
+
+                    <li className="nav-link" id="nav-profile-tab" type="button" 
+                        data-bs-toggle="tab" data-bs-target="#nav-profile" 
+                        role="tab" aria-controls="nav-home" aria-selected="false">profile</li>
+
+                    <li className="nav-link" id="nav-contact-tab" type="button" 
+                        data-bs-toggle="tab" data-bs-target="#nav-contact" 
+                        role="tab" aria-controls="nav-contact" aria-selected="false">contact</li>
+                </nav>
+
+                <div className="col-12 col-md-6 content tab-content" id="nav-tabContent">
+                    <div className="tab-pane fade show active" 
+                        id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab" tabindex="0">
+                        nav home
+                    </div>
+                    <div className="tab-pane fade" 
+                        id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab" tabindex="0">
+                        nav profile
+                    </div>
+                    <div className="tab-pane fade" 
+                        id="nav-contact" role="tabpanel" aria-labelledby="nav-contact-tab" tabindex="0">
+                        nav contact
+                    </div>
                 </div>
-                <div className="tab-pane fade" 
-                    id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab" tabindex="0">
-                    nav profile
-                </div>
-                <div className="tab-pane fade" 
-                    id="nav-contact" role="tabpanel" aria-labelledby="nav-contact-tab" tabindex="0">
-                    nav contact
+
+                <div className="col-12 col-md-3 sidebar right">
+                    sidebar right
                 </div>
             </div>
         </div>

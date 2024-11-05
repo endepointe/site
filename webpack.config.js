@@ -33,15 +33,5 @@ module.exports = {
             template: "./index.html",
         }
     )],
-    devServer: {
-        static: {
-            directory: path.join(__dirname, '/'),
-        },
-        compress: true,
-        port: 8081,
-    },
-    optimization: {
-        runtimeChunk: 'single',
-    },
 }
 
