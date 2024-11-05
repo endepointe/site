@@ -9,55 +9,55 @@ This challenge was enjoyable in many ways and while the author notes that we sho
 
 Start by downloading the binary, making note of the submission guidelines:
 
-![start](start.png)  
+![start](https://github.com/endepointe/site/blob/main/writeups/huntress2024/knightsquest/start.png)  
 
 Running the binary to get a feel for what is happening, making note of any values to look for when we jump into to decompiled binary. As the game progresses through each stage, the health and damage of each enemy is displayed, with each attack coming at the cost of our player's health.
 
-![a](a.png)  
+![a](https://github.com/endepointe/site/blob/main/writeups/huntress2024/knightsquest/a.png)  
 
-![b](b.png)  
+![b](https://github.com/endepointe/site/blob/main/writeups/huntress2024/knightsquest/b.png)  
 
-![c](c.png)  
+![c](https://github.com/endepointe/site/blob/main/writeups/huntress2024/knightsquest/c.png)  
 
-![d](d.png)  
+![d](https://github.com/endepointe/site/blob/main/writeups/huntress2024/knightsquest/d.png)  
 
 The final boss is undefeatable given the current game settings. Lets change that!
 
-![e](e.png)  
+![e](https://github.com/endepointe/site/blob/main/writeups/huntress2024/knightsquest/e.png)  
 
 From the previous, unaltered play, we see the enemies and their corresponding health and attack values (hex). 
 
-![gamestartbeforemodify](gamestartbeforemodify.png)  
+![gamestartbeforemodify](https://github.com/endepointe/site/blob/main/writeups/huntress2024/knightsquest/gamestartbeforemodify.png)  
 
 If we patch values, getting to the win condition becomes easy.
 
 - 0x1e, 0x32, 0x3b9ac9ff
 
-![gamestartbeforemodifyasm](gamestartbeforemodifyasm.png)  
+![gamestartbeforemodifyasm](https://github.com/endepointe/site/blob/main/writeups/huntress2024/knightsquest/gamestartbeforemodifyasm.png)  
 
 Patch those values corresponding to enemy health, and optionally their attack values.
 
-![gamestartaftermodifyasm](gamestartaftermodifyasm.png)  
+![gamestartaftermodifyasm](https://github.com/endepointe/site/blob/main/writeups/huntress2024/knightsquest/gamestartaftermodifyasm.png)  
 
 - 0x0, 0x0, 0x0
 
 Export as a binary.
 
-![exportasnewbinary](exportasnewbinary.png) 
+![exportasnewbinary](https://github.com/endepointe/site/blob/main/writeups/huntress2024/knightsquest/exportasnewbinary.png) 
 
 Begin the game under these new conditions to reach the winning condition.
 
-![beginhax](beginhax.png)  
+![beginhax](https://github.com/endepointe/site/blob/main/writeups/huntress2024/knightsquest/beginhax.png)  
 
-![haxspider](haxspider.png)  
+![haxspider](https://github.com/endepointe/site/blob/main/writeups/huntress2024/knightsquest/haxspider.png)  
 
-![haxogre](haxogre.png)  
+![haxogre](https://github.com/endepointe/site/blob/main/writeups/huntress2024/knightsquest/haxogre.png)  
 
-![haxgorth](haxgorth.png)  
+![haxgorth](https://github.com/endepointe/site/blob/main/writeups/huntress2024/knightsquest/haxgorth.png)  
 
-![wincode](wincode.png)  
+![wincode](https://github.com/endepointe/site/blob/main/writeups/huntress2024/knightsquest/wincode.png)  
 
-![flag](flag.png)  
+![flag](https://github.com/endepointe/site/blob/main/writeups/huntress2024/knightsquest/flag.png)  
 
 ## Conclusion
 

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import {createRoot} from 'react-dom/client';
 import {
     createHashRouter,
@@ -8,19 +8,22 @@ import {
     Navigate,
     redirect,
 } from 'react-router-dom';
+import Markdown from 'react-markdown';
+import remarkGfm from 'remark-gfm';
 
 function Navigation() 
 {
     return (
         <nav className="container text-center">
-            <ul className="nav nav-tabs" id="navTabs" role="tablist"> <li className="nav-item" role="presentation">
+            <ul className="nav nav-tabs" id="navTabs" role="tablist"> 
+                <li className="nav-item" role="presentation">
                     <Link className="nav-link" to="/">Home</Link>
                 </li>
                 <li className="nav-item">
                     <Link className="nav-link" to="/writeups">Writeups</Link>
                 </li>
                 <li className="nav-item">
-                    <Link className="nav-link" to="/other">Oher</Link>
+                    <Link className="nav-link" to="/other">Other</Link>
                 </li>
             </ul>
         </nav>
@@ -29,38 +32,61 @@ function Navigation()
 
 function Writeups()
 {
+    const [defaultContent, showDefaultContent] = useState(true);
+    const [content, setContent] = useState("");
+
+    useEffect(() => {
+        console.log("use effect and state");
+        return () => {}
+    }, [content]);
+
+    const handleDisplayContent = (e) => {
+        let value = e.target.dataset.bsToggle;
+        if (value) {
+            let url = "https://raw.githubusercontent.com/endepointe/site/refs/heads/main/writeups/huntress2024/knightsquest/knightsquest.md";
+            fetch(url).then((response) => {
+                if (!response.ok) {
+                    console.error("issue fetching writeup");
+                }
+                return response.text();
+            })
+            .then((data) => {
+                console.log(data.length);
+                setContent(data);
+            })
+            .catch((error) => {
+                console.error(error);
+            });
+        }
+    }
+
     return (
         <div className="container my-4">
+            <button className="btn btn-primary d-md-none" type="button" data-bs-toggle="offcanvas"
+                data-bs-target="#offcanvasResponsive" aria-controls="offcanvasResponsive">
+                    \\\\\
+                </button>
             <div className="row">
-                <nav className="col-12 col-md-3 sidebar left" role="tablist">
+                <nav className="offcanvas-md offcanvas-start col-12 col-md-3 sidebar left border-end">
                     <h5>Huntress 2024</h5>
                     <ul>
-                        <li className="nav-link active" id="nav-home-tab" type="button"
-                            data-bs-toggle="tab" data-bs-target="#nav-home" 
-                            role="tab" aria-controls="nav-home" aria-selected="true">Knights Quest</li>
+                        <li className="nav-link active" id="nav-knightsquest-tab" type="button"
+                            onClick={(e) => handleDisplayContent(e)} data-bs-toggle="knightsquest" data-bs-target="knightsquest" 
+                            aria-controls="nav-knightsquest" aria-selected="true">Knights Quest</li>
                     </ul>
 
                     <li className="nav-link" id="nav-profile-tab" type="button" 
                         data-bs-toggle="tab" data-bs-target="#nav-profile" 
                         role="tab" aria-controls="nav-home" aria-selected="false">profile</li>
-                    <li><hr className="dropdown-divider" /></li>
                     <li className="nav-link" id="nav-contact-tab" type="button" 
                         data-bs-toggle="tab" data-bs-target="#nav-contact" 
                         role="tab" aria-controls="nav-contact" aria-selected="false">contact</li>
                 </nav>
 
-                <div className="col-12 col-md-6 content tab-content" id="nav-tabContent">
-                    <div className="tab-pane fade show active" 
-                        id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab" tabindex="0">
-                        nav home
-                    </div>
-                    <div className="tab-pane fade" 
-                        id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab" tabindex="0">
-                        nav profile
-                    </div>
-                    <div className="tab-pane fade" 
-                        id="nav-contact" role="tabpanel" aria-labelledby="nav-contact-tab" tabindex="0">
-                        nav contact
+                <div className="offcanvas-body px-4 col-12 col-md-6 content tab-content" id="offcanvasResponsive" 
+                    aria-labelledby="offcanvasResponsiveLabel">
+                    <div id="nav-tabContent">
+                        <Markdown remarkPlugins={[remarkGfm]}>{content}</Markdown>
                     </div>
                 </div>
 
