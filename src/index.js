@@ -7,9 +7,9 @@ import {
     Link,
     Navigate,
     redirect,
+    useParams,
 } from 'react-router-dom';
 import Markdown from 'react-markdown';
-import remarkGfm from 'remark-gfm';
 
 function Navigation() 
 {
@@ -22,9 +22,6 @@ function Navigation()
                 <li className="nav-item">
                     <Link className="nav-link" to="/writeups">Writeups</Link>
                 </li>
-                <li className="nav-item">
-                    <Link className="nav-link" to="/other">Other</Link>
-                </li>
             </ul>
         </nav>
     );
@@ -32,19 +29,49 @@ function Navigation()
 
 function Writeups()
 {
-    const [defaultContent, showDefaultContent] = useState(true);
+    const {dir,filename} = useParams();
     const [content, setContent] = useState("");
+    const [url, setUrl] = useState("https://raw.githubusercontent.com/endepointe/site/refs/heads/main/writeups/");
+    const [base, setBase] = useState("https://raw.githubusercontent.com/endepointe/site/main/writeups/");
 
     useEffect(() => {
-        console.log("use effect and state");
+        if (dir && filename) {
+            console.log(dir,filename);
+            let u = url + `${dir}/${filename}/${filename}.md`;
+            let b = base + `${dir}/${filename}/`; // i know, this needs better content management but works.
+
+            fetch(u).then((response) => {
+                if (!response.ok) {
+
+                    console.error("issue fetching writeup");
+                }
+                return response.text();
+            })
+            .then((data) => {
+                console.log(data.length);
+                let updatedContent = data.replace(/!\[([^\]]*)\]\(([^)]+)\)/g, (match, alt, src) => {
+                    if (!src.startsWith('http')) {
+                        return `![${alt}](${b}${src})`;
+                    }
+                    return match;
+                });
+                setContent(updatedContent);
+            })
+            .catch((error) => {
+                console.error(error);
+            });
+        }
         return () => {}
-    }, [content]);
+    }, [dir,filename,content]);
 
     const handleDisplayContent = (e) => {
-        let value = e.target.dataset.bsToggle;
-        if (value) {
-            let url = "https://raw.githubusercontent.com/endepointe/site/refs/heads/main/writeups/huntress2024/knightsquest/knightsquest.md";
-            fetch(url).then((response) => {
+        let dir = e.target.dataset.writeupDir;
+        let filename = e.target.dataset.writeupName;
+        if (dir && filename) {
+            let u = url + `${dir}/${filename}.md`;
+            let b = base + `${dir}/`;
+
+            fetch(u).then((response) => {
                 if (!response.ok) {
                     console.error("issue fetching writeup");
                 }
@@ -52,7 +79,13 @@ function Writeups()
             })
             .then((data) => {
                 console.log(data.length);
-                setContent(data);
+                let updatedContent = data.replace(/!\[([^\]]*)\]\(([^)]+)\)/g, (match, alt, src) => {
+                    if (!src.startsWith('http')) {
+                        return `![${alt}](${b}${src})`;
+                    }
+                    return match;
+                });
+                setContent(updatedContent);
             })
             .catch((error) => {
                 console.error(error);
@@ -64,34 +97,37 @@ function Writeups()
         <div className="container my-4">
             <button className="btn btn-primary d-md-none" type="button" data-bs-toggle="offcanvas"
                 data-bs-target="#offcanvasResponsive" aria-controls="offcanvasResponsive">
-                    \\\\\
+                    \\\
                 </button>
             <div className="row">
-                <nav className="offcanvas-md offcanvas-start col-12 col-md-3 sidebar left border-end">
+                <nav className="offcanvas-md offcanvas-start col-md-3 sidebar left border-end"
+                    tabIndex="-1" id="offcanvasResponsive" aria-labelledby="offcanvasResponsiveLabel">
                     <h5>Huntress 2024</h5>
                     <ul>
                         <li className="nav-link active" id="nav-knightsquest-tab" type="button"
-                            onClick={(e) => handleDisplayContent(e)} data-bs-toggle="knightsquest" data-bs-target="knightsquest" 
+                            onClick={(e) => handleDisplayContent(e)} data-writeup-dir="huntress2024/knightsquest" data-writeup-name="knightsquest" 
                             aria-controls="nav-knightsquest" aria-selected="true">Knights Quest</li>
                     </ul>
 
-                    <li className="nav-link" id="nav-profile-tab" type="button" 
-                        data-bs-toggle="tab" data-bs-target="#nav-profile" 
-                        role="tab" aria-controls="nav-home" aria-selected="false">profile</li>
-                    <li className="nav-link" id="nav-contact-tab" type="button" 
-                        data-bs-toggle="tab" data-bs-target="#nav-contact" 
-                        role="tab" aria-controls="nav-contact" aria-selected="false">contact</li>
                 </nav>
 
-                <div className="offcanvas-body px-4 col-12 col-md-6 content tab-content" id="offcanvasResponsive" 
-                    aria-labelledby="offcanvasResponsiveLabel">
-                    <div id="nav-tabContent">
-                        <Markdown remarkPlugins={[remarkGfm]}>{content}</Markdown>
+                <div className="px-4 col-12 col-md-9 content tab-content">
+                    <div id="nav-tabContent" className="vh-100 overflow-y-auto">
+                        <Markdown 
+                            components={{
+                                img: ({node, ...props}) => (
+                                    <img 
+                                        {...props} 
+                                        alt={node.alt} 
+                                        style={{ 
+                                            maxWidth: "100%",
+                                            height: "auto",
+                                            maxHeight: "600px"
+                                        }} 
+                                    />
+                                )
+                            }}>{content}</Markdown>
                     </div>
-                </div>
-
-                <div className="col-12 col-md-3 sidebar right">
-                    sidebar right
                 </div>
             </div>
         </div>
@@ -104,7 +140,7 @@ const router = createHashRouter([
         element: (
             <div className="">
                 <Navigation />
-                <h1>Home</h1>
+                <h1>Home (in-progress)</h1>
             </div>
         ),
     },
@@ -117,31 +153,18 @@ const router = createHashRouter([
             </div>),
     },
     {
-        path: '/writeups/:name',
-        loader: ({ params }) => {
-            alert(params.name);
-        },
-        action:({ params }) => {},
+        path: '/writeups/:dir/:filename',
         element: (
             <div>
                 <Navigation />
-                <h1>Writeups</h1>
+                <Writeups />
             </div>
         ),
         errorElement: (
             <div className="">
                 <Navigation />
-                <h1>Home</h1>
             </div>
         )
-    },
-    {
-        path: "/other",
-        element: (
-            <div className="">
-                <Navigation />
-                <h1>other</h1>
-            </div>),
     },
 ]);
 
