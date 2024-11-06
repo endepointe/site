@@ -3,7 +3,7 @@
 	"version": "0.0.0",
 	"description": "",
 	"private": true,
-	"homepage": "./dist/index.html",
+	"homepage": "endepointe.com",
 	"keywords": [
 		"ctf",
 		"reverse"
@@ -19,12 +19,12 @@
 		"@babel/preset-env": "^7.26.0",
 		"@babel/preset-react": "^7.25.9",
 		"babel-loader": "^9.2.1",
+		"gh-pages": "^6.2.0",
 		"html-webpack-plugin": "^5.6.3",
 		"webpack": "^5.96.1",
 		"webpack-cli": "^5.1.4"
 	},
 	"dependencies": {
-		"gh-pages": "^6.2.0",
 		"react": "^18.3.1",
 		"react-dom": "^18.3.1",
 		"react-markdown": "^9.0.1",
