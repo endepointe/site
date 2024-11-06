@@ -1,7 +1,7 @@
 {
 	"name": "endepointe",
 	"version": "0.0.0",
-	"description": "",
+	"description": "endepointe.com",
 	"private": true,
 	"homepage": "endepointe.com",
 	"keywords": [
@@ -9,17 +9,15 @@
 		"reverse"
 	],
 	"scripts": {
-		"predeploy": "pnpm run build",
+		"deploy": "pnpm run build",
 		"build": "webpack",
-		"watch": "webpack --watch",
-		"deploy-yes": "gh-pages -d dist"
+		"watch": "webpack --watch"
 	},
 	"devDependencies": {
 		"@babel/core": "^7.26.0",
 		"@babel/preset-env": "^7.26.0",
 		"@babel/preset-react": "^7.25.9",
 		"babel-loader": "^9.2.1",
-		"gh-pages": "^6.2.0",
 		"html-webpack-plugin": "^5.6.3",
 		"webpack": "^5.96.1",
 		"webpack-cli": "^5.1.4"
