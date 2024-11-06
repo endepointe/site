@@ -3,7 +3,7 @@
 	"version": "0.0.0",
 	"description": "",
 	"private": true,
-	"homepage": "./index.html",
+	"homepage": "./dist/index.html",
 	"keywords": [
 		"ctf",
 		"reverse"
