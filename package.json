@@ -12,7 +12,7 @@
 		"predeploy": "pnpm run build",
 		"build": "webpack",
 		"watch": "webpack --watch",
-		"deploy-yes": "gh-pages -d build"
+		"deploy-yes": "gh-pages -d dist"
 	},
 	"devDependencies": {
 		"@babel/core": "^7.26.0",
