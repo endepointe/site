@@ -1,6 +1,5 @@
-import './Sidebar.css';
 import * as bootstrap from 'bootstrap';
-import React, { useEffect, useState, useRef } from 'react';
+import React, { useEffect, useState } from 'react';
 import {createRoot} from 'react-dom/client';
 import {
     createHashRouter,
@@ -39,7 +38,6 @@ function Writeups()
     const [url, setUrl] = useState("https://raw.githubusercontent.com/endepointe/site/refs/heads/main/writeups/");
     const [base, setBase] = useState("https://raw.githubusercontent.com/endepointe/site/main/writeups/");
     const [isOpen, setIsOpen] = useState(false);
-    const offcanvasRef = useRef(null);
 
     useEffect(() => {
         if (dir && filename) {
@@ -112,7 +110,7 @@ function Writeups()
     }
 
     return (
-        <div className="container my-4">
+        <div className="container my-4 pb-8">
             <button className="btn btn-primary d-md-none my-3" onClick={toggleSidebar}>
                 \\\
             </button>
@@ -129,13 +127,12 @@ function Writeups()
                                 onClick={(e) => handleDisplayContent(e)} onTouchStart={(e) => handleDisplayContent(e)} 
                                 data-writeup-dir="huntress2024/gocrackme2" data-writeup-name="gocrackme2" 
                                 aria-controls="nav-gocrackme2" aria-selected="true">GoCrackMe2</li>
-     
                         </ul>
                     </div>
                 </nav>
 
-                <div className="px-4 col-12 col-md-9 content tab-content">
-                    <div id="nav-tabContent" className="vh-100 overflow-y-auto">
+                <div className="px-4 col-12 col-md-9">
+                    <div id="nav-tabContent" className="py-4">
                         <Markdown
                             children={content}
                             components={{
@@ -144,6 +141,7 @@ function Writeups()
                                         {...props}
                                         alt={node.alt || ""}
                                         style={{
+                                            overflowY: 'auto',
                                             maxWidth: "100%",
                                             height: "auto",
                                             maxHeight: "600px"

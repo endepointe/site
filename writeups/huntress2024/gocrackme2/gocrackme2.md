@@ -10,7 +10,18 @@ Archive password: infected
 ## tl;dr
 
 The following is the reverse engineering of a go binary to obtain the final flag. It assumes
-familiarity with elf, gdb(gef), ghidra, and some python. Let's begin!
+familiarity with elf, gdb(gef), ghidra, and some python. 
+
+### Links to tools and concepts:
+
+- [elf]{https://wiki.osdev.org/ELF}
+- [remnux]{https://remnux.org/}
+- [ghidra]{https://ghidra-sre.org/}
+- [gdb]{https://sourceware.org/gdb/}
+- [gef]{https://hugsy.github.io/gef/}
+
+
+Let's begin!
 
 ## What are we dealing with:
 
@@ -116,7 +127,7 @@ Lets jump into the binary and see what is going on.
 
 Using ghidra and a go analyzer: 
 
-    https://github.com/mooncat-greenpy/Ghidra_GolangAnalyzerExtension
+- [mooncat analyzer]{https://github.com/mooncat-greenpy/Ghidra_GolangAnalyzerExtension}
 
 
 Reminder: as I go through any code, it is helpful to look for known values in all their forms.

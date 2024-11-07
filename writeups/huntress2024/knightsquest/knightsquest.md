@@ -11,6 +11,15 @@ Not bad gophers, but that one was the easiest of the three! How will you do agai
 ## tl;dr
 This challenge was enjoyable in many ways and while the author notes that we should not expect any help with dubugging symbols, if you have the right analyzer, a lack of debugging symbols is not a concern. The flag is attainable by setting the win condition by weakening your enemies. Lets begin:
 
+### Links to tools and concepts:
+
+- [elf]{https://wiki.osdev.org/ELF}
+- [remnux]{https://remnux.org/}    
+- [ghidra]{https://ghidra-sre.org/}                           
+- [gdb]{https://sourceware.org/gdb/}
+- [gef]{https://hugsy.github.io/gef/} 
+
+
 Start by downloading the binary, making note of the submission guidelines:
 
 ![start](start.png)  
