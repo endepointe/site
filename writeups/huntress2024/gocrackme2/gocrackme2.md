@@ -1,4 +1,25 @@
 
+# GoCrackMe2
+
+Author: @HuskyHacks
+
+Not bad gophers, but that one was the easiest of the three! How will you do against something a little more involved? I wouldn't expect to get any help from debugging symbols on this one...
+
+Archive password: infected
+
+## tl;dr
+
+The following is the reverse engineering of a go binary to obtain the final flag. It assumes
+familiarity with elf, gdb(gef), ghidra, and some python. Let's begin!
+
+## What are we dealing with:
+
+```bash
+remnux@remnux:~$ file GoCrackMe2
+GoCrackMe2: ELF 64-bit LSB executable, x86-64, version 1 (SYSV), statically linked, Go BuildID=ZoJpBG92x8YsXkvYlAu_/U3EHV-7u2vOUwgqGwVrd/34uedjykpiiHm8Z79hII/NZH2W-dBCUwjncxq5v9g, stripped
+```
+
+Since it is stripped, we need an entry point to main:
 
 ## Read ELF:
 
@@ -25,6 +46,9 @@ ELF Header:
   Number of section headers:         14
   Section header string table index: 13
 ```
+
+Without much else to go on (I ran it through VT later but its not important right now),
+let's just run this binary and see what happens:
 
 ## Initial Runs
 
@@ -54,7 +78,7 @@ remnux@remnux:~$ ./GoCrackMe2
 flag{57fc4d2324f390751}
 ```
 
-For future reference, here is a script to run a binary a specified amoutn of times:
+For future reference, here is a script to run a binary a specified amount of times:
 
 ```python
 import sys
@@ -80,15 +104,24 @@ if __name__ == "__main__":
     main()
 ```
 
-We get parts of a potential flag which leads to the impression that if the binary is 
-executed enough times, the flag components would be produced. Yet, when ran enough times, 
+We get parts of a potential flag which gives the impression that if the binary is 
+executed enough times, the flag components will be produced. Yet, when ran enough times, 
 there is still a portion of the flag that is dynamically produced.
 
-Lets jump into the binary and see what is going on. I used ghidra and a go analyzer: 
+When I first opened up ghidra to analyze this stripped binary, I was hoping that it would 
+be somewhat simple to trace through - I was wrong. After some searching, I found an analyzer
+that rebuilds function names as best as it can.
+
+Lets jump into the binary and see what is going on.
+
+Using ghidra and a go analyzer: 
 
     https://github.com/mooncat-greenpy/Ghidra_GolangAnalyzerExtension
 
-As I go through any code, it is helpful to look for known values in all their forms:
+
+Reminder: as I go through any code, it is helpful to look for known values in all their forms.
+
+Here is some code to help with that:
 
 ```python
 >>> flag = "flag{"
@@ -107,6 +140,7 @@ As I go through any code, it is helpful to look for known values in all their fo
 ```
 
 Using Ghidra, scrolling through `main.main`, you will come across the following loop:
+
 ```go
 for (lVar8 = 0; lVar8 < lVar4; lVar8 = lVar8 + 1) {
         /* /app/src/GoCrackMe2/GoCrackMe2.go:17 */
@@ -117,6 +151,7 @@ for (lVar8 = 0; lVar8 < lVar4; lVar8 = lVar8 + 1) {
 ```
 
 The corresponding assembly:
+
 ```asm
                      /app/src/GoCrackMe2/GoCrackMe2.go:17
                      LAB_00488316                                    XREF[1]:     00488327(j)  
@@ -210,12 +245,6 @@ $cs: 0x33 $ss: 0x2b $ds: 0x00 $es: 0x00 $fs: 0x00 $gs: 0x00
      0x488321                  inc    rbx
      0x488324                  cmp    rbx, rcx
      0x488327                  jl     0x488316
-───────────────────────────────────────────────────────────────────────────────────── threads ────
-[#0] Id 1, Name: "GoCrackMe2", stopped 0x488316 in ?? (), reason: BREAKPOINT
-[#1] Id 2, Name: "GoCrackMe2", stopped 0x467217 in ?? (), reason: BREAKPOINT
-[#2] Id 3, Name: "GoCrackMe2", stopped 0x4677e3 in ?? (), reason: BREAKPOINT
-[#3] Id 4, Name: "GoCrackMe2", stopped 0x4677e3 in ?? (), reason: BREAKPOINT
-[#4] Id 5, Name: "GoCrackMe2", stopped 0x4677e3 in ?? (), reason: BREAKPOINT
 ─────────────────────────────────────────────────────────────────────────────────────── trace ────
 [#0] 0x488316 → movzx esi, BYTE PTR [rdx+rbx*1]
 gef➤  ni
@@ -271,9 +300,11 @@ $cs: 0x33 $ss: 0x2b $ds: 0x00 $es: 0x00 $fs: 0x00 $gs: 0x00
 ─────────────────────────────────────────────────────────────────────────────────────── trace ────
 [#0] 0x48831a → xor esi, 0x6d
 ──────────────────────────────────────────────────────────────────────────────────────────────────
+```
 
--- continue a few more times and in a new gdb session --
+You will have to continue a few more times in a new gdb session:
 
+```bash
 gef➤  
 Continuing.
 
@@ -320,13 +351,6 @@ $cs: 0x33 $ss: 0x2b $ds: 0x00 $es: 0x00 $fs: 0x00 $gs: 0x00
      0x488324                  cmp    rbx, rcx
      0x488327                  jl     0x488316
      0x488329                  jmp    0x4881d2
-────────────────────────────────────────────────────────────────────────────────────── threads ────
-[#0] Id 1, Name: "GoCrackMe2", stopped 0x4677e3 in ?? (), reason: BREAKPOINT
-[#1] Id 2, Name: "GoCrackMe2", stopped 0x467217 in ?? (), reason: BREAKPOINT
-[#2] Id 3, Name: "GoCrackMe2", stopped 0x4677e3 in ?? (), reason: BREAKPOINT
-[#3] Id 4, Name: "GoCrackMe2", stopped 0x48831a in ?? (), reason: BREAKPOINT
-[#4] Id 5, Name: "GoCrackMe2", stopped 0x4677e3 in ?? (), reason: BREAKPOINT
-[#5] Id 6, Name: "GoCrackMe2", stopped 0x4677e3 in ?? (), reason: BREAKPOINT
 ──────────────────────────────────────────────────────────────────────────────────────── trace ────
 [#0] 0x48831a → xor esi, 0x6d
 [#1] 0x494f40 → or BYTE PTR [rax], al
@@ -352,8 +376,7 @@ read in the same direction.
 The value in rdx, when XOR'd with 0x6d, produces the string: `flag{57f` .
 
 Assuming you have ran the binary enough times, you will get a set of values to construct 24 of the 
-32 flag characters. Given that this is little-endian, the remaining flag belongs in the front of 
-this string:
+32 flag characters. 
 
 ```bash
 a = 57fc4d2324
@@ -364,11 +387,8 @@ flag = set containing {abcd}
 ```
 
 We are looking for any locations where we can get 8 characters, most likely from register values
-because I do not see any file or memory writes. lVar4 is closely related to the flag and given 
-the while loop, we should watch its last value at the end of the loop.
-
-Set a breakpoint at: `0x48812f` and step through the code, making note of any hex values that 
-are not already part of the flag that can construct the remainder of the flag.
+because I do not see any file or memory writes. lVar4 is closely related to the flag and, given 
+the while loop, we should watch lVar4 at the end of the loop.
 
 ```go
 lVar4 = 0;
@@ -479,16 +499,20 @@ while( true ) {
       }
       *puVar6 = uVar7;
     }
-puVar6 = (undefined8 *)(*(long *)((long)register0x00000020 + -0x18) + 0x20);
-lVar4 = *(long *)((long)register0x00000020 + -0x1e0) + 1;
+    puVar6 = (undefined8 *)(*(long *)((long)register0x00000020 + -0x18) + 0x20);
+    lVar4 = *(long *)((long)register0x00000020 + -0x1e0) + 1; # <----HERE
 }
 ```
 
-You will see a few register values that already contain segments of the flag if you do the 
-conversions. However, there is a new hex string that has not been seen yet in the ecx register.
+Set a breakpoint at: `0x48812f` and step through the code, making note of any hex values that 
+have not been seen.
+
+As you step through, you will see a few register values that already contain segments of the flag 
+if you do the conversions. However, there is a new hex string that has not been seen yet in the 
+ecx register.
 
 ```bash
-gef➤  
+gef➤ c 
 Continuing.
 
 Thread 1 "GoCrackMe2" hit Breakpoint 4, 0x000000000048812f in ?? ()
@@ -509,7 +533,8 @@ $r10   : 0x0
 $r11   : 0x000000c00011ed90  →  0x000000000000c88e
 $r12   : 0x000000c000126030  →  0x0000007b67616c66 ("flag{"?)
 $r13   : 0x0               
-$r14   : 0x000000c0000061c0  →  0x000000c00011e000  →  0x000000c00011f000  →  0x000000c000120000  →  0x000000c000121000  →  0x0000000000000000
+$r14   : 0x000000c0000061c0  →  0x000000c00011e000  →  0x000000c00011f000  →  0x000000c000120000  →  
+                                                                0x000000c000121000  →  0x0000000000000000
 $r15   : 0x3               
 $eflags: [zero carry parity adjust sign trap INTERRUPT direction overflow resume virtualx86 identification]
 $cs: 0x33 $ss: 0x2b $ds: 0x00 $es: 0x00 $fs: 0x00 $gs: 0x00 
@@ -536,9 +561,11 @@ $cs: 0x33 $ss: 0x2b $ds: 0x00 $es: 0x00 $fs: 0x00 $gs: 0x00
 ```
 
 From what has already been seen, the flag is a combination of strings produced at random so it would
-make sense that if this new hex string is the final key to the flag, we can find the permutations and
-guess a result. This is the downside of not having a standard flag format and was addressed by the 
-creators post competition.
+make sense that, if this new hex string is the final key to the flag, we can find the permutations and
+guess a result. 
+
+NOTE: This is the downside of not having a standard flag format and was addressed by the creators 
+        post-competition.
 
 Go ahead and run this script and try out the strings .... or .... see the flag below ...:
 
