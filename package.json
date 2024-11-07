@@ -12,7 +12,7 @@
 		"predeploy": "pnpm run build",
 		"build": "webpack",
 		"watch": "webpack --watch",
-		"deploy-yes": "gh-pages -b dist -d dist"
+		"deploy-yes": "node node_modules/gh-pages/bin/gh-pages-clean && gh-pages -b dist -d dist"
 	},
 	"devDependencies": {
 		"@babel/core": "^7.26.0",
