@@ -1,0 +1,54 @@
+/* Container for sidebar and toggle button */
+.sidebar-container {
+  position: relative;
+}
+
+.toggle-button {
+  margin: 10px;
+}
+
+/* Sidebar styles */
+.sidebar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 200px;
+  background-color: #333;
+  color: white;
+  overflow: auto;
+  transition: transform 0.3s ease;
+  transform: translateX(-100%);
+}
+
+/* Open state for sidebar */
+.sidebar.open {
+  transform: translateX(0);
+}
+
+/* List items */
+.sidebar ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.sidebar ul li {
+  padding: 15px;
+  cursor: pointer;
+}
+
+.sidebar ul li:hover {
+  background-color: #444;
+}
+
+/* Show sidebar on medium and larger screens */
+@media (min-width: 768px) {
+  .sidebar {
+    transform: translateX(0); /* Keep sidebar visible */
+  }
+
+  .toggle-button {
+    display: none; /* Hide toggle button on larger screens */
+  }
+}
+

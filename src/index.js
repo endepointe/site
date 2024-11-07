@@ -1,4 +1,6 @@
-import React, { useEffect, useState } from 'react';
+import './Sidebar.css';
+import * as bootstrap from 'bootstrap';
+import React, { useEffect, useState, useRef } from 'react';
 import {createRoot} from 'react-dom/client';
 import {
     createHashRouter,
@@ -29,12 +31,15 @@ function Navigation()
     );
 }
 
+
 function Writeups()
 {
     const {dir,filename} = useParams();
     const [content, setContent] = useState("");
     const [url, setUrl] = useState("https://raw.githubusercontent.com/endepointe/site/refs/heads/main/writeups/");
     const [base, setBase] = useState("https://raw.githubusercontent.com/endepointe/site/main/writeups/");
+    const [isOpen, setIsOpen] = useState(false);
+    const offcanvasRef = useRef(null);
 
     useEffect(() => {
         if (dir && filename) {
@@ -66,7 +71,18 @@ function Writeups()
         return () => {}
     }, [dir,filename,content]);
 
+    const toggleSidebar = () => {
+        setIsOpen(!isOpen);
+    };
+
+    const handleItemClick = () => {
+        if (window.innerWidth < 768) {
+            setIsOpen(false);
+        }
+    };
+
     const handleDisplayContent = (e) => {
+        handleItemClick();
         let dir = e.target.dataset.writeupDir;
         let filename = e.target.dataset.writeupName;
         if (dir && filename) {
@@ -97,25 +113,25 @@ function Writeups()
 
     return (
         <div className="container my-4">
-            <button className="btn btn-primary d-md-none" type="button" data-bs-toggle="offcanvas"
-                data-bs-target="#offcanvasResponsive" aria-controls="offcanvasResponsive">
-                    \\\
-                </button>
+            <button className="btn btn-primary d-md-none my-3" onClick={toggleSidebar}>
+                \\\
+            </button>
             <div className="row">
-                <nav className="offcanvas-md offcanvas-start col-md-3 sidebar left border-end"
-                    tabIndex="-1" id="offcanvasResponsive" aria-labelledby="offcanvasResponsiveLabel">
-                    <h5>Huntress 2024</h5>
-                    <ul>
-                        <li className="nav-link active" id="nav-knightsquest-tab" type="button" role="button"
-                            onClick={(e) => handleDisplayContent(e)} onTouchStart={(e) => handleDisplayContent(e)}
-                            data-writeup-dir="huntress2024/knightsquest" data-writeup-name="knightsquest" 
-                            aria-controls="nav-knightsquest" aria-selected="true">Knights Quest</li>
-                        <li className="nav-link active" id="nav-gocrackme2-tab" type="button" role="button"
-                            onClick={(e) => handleDisplayContent(e)} onTouchStart={(e) => handleDisplayContent(e)} 
-                            data-writeup-dir="huntress2024/gocrackme2" data-writeup-name="gocrackme2" 
-                            aria-controls="nav-gocrackme2" aria-selected="true">GoCrackMe2</li>
- 
-                    </ul>
+                <nav className={`col-md-3 p-3 ${isOpen ? '' : 'd-none d-md-block'}`}>
+                    <div>
+                        <h5>Huntress 2024</h5>
+                        <ul>
+                            <li className="nav-link active" id="nav-knightsquest-tab" type="button" role="button"
+                                onClick={(e) => handleDisplayContent(e)} onTouchStart={(e) => handleDisplayContent(e)}
+                                data-writeup-dir="huntress2024/knightsquest" data-writeup-name="knightsquest" 
+                                aria-controls="nav-knightsquest" aria-selected="true">Knights Quest</li>
+                            <li className="nav-link active" id="nav-gocrackme2-tab" type="button" role="button"
+                                onClick={(e) => handleDisplayContent(e)} onTouchStart={(e) => handleDisplayContent(e)} 
+                                data-writeup-dir="huntress2024/gocrackme2" data-writeup-name="gocrackme2" 
+                                aria-controls="nav-gocrackme2" aria-selected="true">GoCrackMe2</li>
+     
+                        </ul>
+                    </div>
                 </nav>
 
                 <div className="px-4 col-12 col-md-9 content tab-content">

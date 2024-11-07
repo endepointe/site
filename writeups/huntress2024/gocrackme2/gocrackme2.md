@@ -623,3 +623,13 @@ This challenge was challenging to say the least but I learned a great deal about
 shored up my confidence in reversing other binaries and doing general debugging. The analyzer
 was invaluable to get a grasp of program flow so shout out to those creators. I hope you enjoyed 
 the walkthrough and found it helpful!
+
+
+
+
+
+
+
+
+
+.fin

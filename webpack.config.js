@@ -1,4 +1,7 @@
+'use strict';
+
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const autoprefixer = require('autoprefixer');
 const path = require('path');
 
 module.exports = {
@@ -25,7 +28,31 @@ module.exports = {
                         ]
                     }
                 }
-            }
+            },
+            {
+                test: /\.s?css$/,
+                use: [
+                    {
+                        loader: 'style-loader'
+                    },
+                    {
+                        loader: 'css-loader'
+                    },
+                    {
+                        loader: 'postcss-loader',
+                            options: {
+                                postcssOptions: {
+                                plugins: [
+                                    autoprefixer
+                                ]
+                            }
+                        }
+                    },
+                    {
+                        loader: 'sass-loader'
+                    }
+                ]
+            },
         ]
     },
     plugins: [new HtmlWebpackPlugin(
