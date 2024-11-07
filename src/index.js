@@ -106,17 +106,16 @@ function Writeups()
                     tabIndex="-1" id="offcanvasResponsive" aria-labelledby="offcanvasResponsiveLabel">
                     <h5>Huntress 2024</h5>
                     <ul>
-                        <li className="nav-link active" id="nav-knightsquest-tab" type="button"
-                            onClick={(e) => handleDisplayContent(e)} data-writeup-dir="huntress2024/knightsquest" 
-                            data-writeup-name="knightsquest" 
+                        <li className="nav-link active" id="nav-knightsquest-tab" type="button" role="button"
+                            onClick={(e) => handleDisplayContent(e)} onTouchStart={(e) => handleDisplayContent(e)}
+                            data-writeup-dir="huntress2024/knightsquest" data-writeup-name="knightsquest" 
                             aria-controls="nav-knightsquest" aria-selected="true">Knights Quest</li>
-                        <li className="nav-link active" id="nav-gocrackme2-tab" type="button"
-                            onClick={(e) => handleDisplayContent(e)} data-writeup-dir="huntress2024/gocrackme2" 
-                            data-writeup-name="gocrackme2" 
-                            aria-controls="nav-knightsquest" aria-selected="true">GoCrackMe2</li>
+                        <li className="nav-link active" id="nav-gocrackme2-tab" type="button" role="button"
+                            onClick={(e) => handleDisplayContent(e)} onTouchStart={(e) => handleDisplayContent(e)} 
+                            data-writeup-dir="huntress2024/gocrackme2" data-writeup-name="gocrackme2" 
+                            aria-controls="nav-gocrackme2" aria-selected="true">GoCrackMe2</li>
  
                     </ul>
-
                 </nav>
 
                 <div className="px-4 col-12 col-md-9 content tab-content">
