@@ -14,11 +14,11 @@ familiarity with elf, gdb(gef), ghidra, and some python.
 
 ### Links to tools and concepts:
 
-- [elf]{https://wiki.osdev.org/ELF}
-- [remnux]{https://remnux.org/}
-- [ghidra]{https://ghidra-sre.org/}
-- [gdb]{https://sourceware.org/gdb/}
-- [gef]{https://hugsy.github.io/gef/}
+- [elf](https://wiki.osdev.org/ELF)
+- [remnux](https://remnux.org/)
+- [ghidra](https://ghidra-sre.org/)
+- [gdb](https://sourceware.org/gdb/)
+- [gef](https://hugsy.github.io/gef/)
 
 
 Let's begin!

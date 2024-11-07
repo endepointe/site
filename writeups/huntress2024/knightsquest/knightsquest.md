@@ -13,11 +13,11 @@ This challenge was enjoyable in many ways and while the author notes that we sho
 
 ### Links to tools and concepts:
 
-- [elf]{https://wiki.osdev.org/ELF}
-- [remnux]{https://remnux.org/}    
-- [ghidra]{https://ghidra-sre.org/}                           
-- [gdb]{https://sourceware.org/gdb/}
-- [gef]{https://hugsy.github.io/gef/} 
+- [elf](https://wiki.osdev.org/ELF)
+- [remnux](https://remnux.org/)    
+- [ghidra](https://ghidra-sre.org/)                          
+- [gdb](https://sourceware.org/gdb/)
+- [gef](https://hugsy.github.io/gef/)
 
 
 Start by downloading the binary, making note of the submission guidelines:
