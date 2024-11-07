@@ -10,6 +10,8 @@ import {
     useParams,
 } from 'react-router-dom';
 import Markdown from 'react-markdown';
+import {Prism as SyntaxHighlighter} from 'react-syntax-highlighter';
+import {dark} from 'react-syntax-highlighter/dist/esm/styles/prism';
 
 function Navigation() 
 {
@@ -78,7 +80,6 @@ function Writeups()
                 return response.text();
             })
             .then((data) => {
-                console.log(data.length);
                 let updatedContent = data.replace(/!\[([^\]]*)\]\(([^)]+)\)/g, (match, alt, src) => {
                     if (!src.startsWith('http')) {
                         return `![${alt}](${b}${src})`;
@@ -86,6 +87,7 @@ function Writeups()
                     return match;
                 });
                 setContent(updatedContent);
+                window.location.hash = '#/writeups/' + `${dir}`;
             })
             .catch((error) => {
                 console.error(error);
@@ -105,28 +107,53 @@ function Writeups()
                     <h5>Huntress 2024</h5>
                     <ul>
                         <li className="nav-link active" id="nav-knightsquest-tab" type="button"
-                            onClick={(e) => handleDisplayContent(e)} data-writeup-dir="huntress2024/knightsquest" data-writeup-name="knightsquest" 
+                            onClick={(e) => handleDisplayContent(e)} data-writeup-dir="huntress2024/knightsquest" 
+                            data-writeup-name="knightsquest" 
                             aria-controls="nav-knightsquest" aria-selected="true">Knights Quest</li>
+                        <li className="nav-link active" id="nav-gocrackme2-tab" type="button"
+                            onClick={(e) => handleDisplayContent(e)} data-writeup-dir="huntress2024/gocrackme2" 
+                            data-writeup-name="gocrackme2" 
+                            aria-controls="nav-knightsquest" aria-selected="true">GoCrackMe2</li>
+ 
                     </ul>
 
                 </nav>
 
                 <div className="px-4 col-12 col-md-9 content tab-content">
                     <div id="nav-tabContent" className="vh-100 overflow-y-auto">
-                        <Markdown 
+                        <Markdown
+                            children={content}
                             components={{
-                                img: ({node, ...props}) => (
-                                    <img 
-                                        {...props} 
-                                        alt={node.alt} 
-                                        style={{ 
+                                img: ({ node, ...props }) => (
+                                    <img
+                                        {...props}
+                                        alt={node.alt || ""}
+                                        style={{
                                             maxWidth: "100%",
                                             height: "auto",
                                             maxHeight: "600px"
-                                        }} 
+                                        }}
                                     />
-                                )
-                            }}>{content}</Markdown>
+                                ),
+                                code: ({ node, inline, className, children, ...props }) => {
+                                    const match = /language-(\w+)/.exec(className || '');
+                                    return !inline && match ? (
+                                        <SyntaxHighlighter
+                                            {...props}
+                                            language={match[1]}
+                                            style={dark}
+                                            PreTag="div"
+                                        >
+                                            {String(children).replace(/\n$/, '')}
+                                        </SyntaxHighlighter>
+                                    ) : (
+                                        <code className={className} {...props}>
+                                            {children}
+                                        </code>
+                                    );
+                                }
+                            }}
+                        />
                     </div>
                 </div>
             </div>
