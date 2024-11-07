@@ -86,7 +86,7 @@ there is still a portion of the flag that is dynamically produced.
 
 Lets jump into the binary and see what is going on. I used ghidra and a go analyzer: 
 
-    insert url to analyzer 
+    https://github.com/mooncat-greenpy/Ghidra_GolangAnalyzerExtension
 
 As I go through any code, it is helpful to look for known values in all their forms:
 
@@ -153,6 +153,8 @@ Breakpoint 1, 0x0000000000467040 in ?? ()
 
 ... rest of gef output ...
 ```
+
+You may want to watch rcx or rbx, or just make a mental note that this holds the loop counter.
 
 Set the next breakpoint at ESI within the loop from the assembly where the XOR occurs:
 
@@ -357,31 +359,195 @@ this string:
 a = 57fc4d2324
 b = f750878
 c = f390751
-d = 66f75087 remaining 8 characters
+d = remaining 8 characters
 flag = set containing {abcd}
 ```
 
 We are looking for any locations where we can get 8 characters, most likely from register values
-because I do not see any file or memory writes.
+because I do not see any file or memory writes. lVar4 is closely related to the flag and given 
+the while loop, we should watch its last value at the end of the loop.
 
-The following five values do not change during the XOR stage. XOR these values for 
-possible flag:
+Set a breakpoint at: `0x48812f` and step through the code, making note of any hex values that 
+are not already part of the flag that can construct the remainder of the flag.
+
+```go
+lVar4 = 0;
+while( true ) {
+    if (4 < lVar4) {
+      uVar7 = 0;
+      uVar5 = 0;
+      lVar4 = 0;
+                /* /app/src/GoCrackMe2/GoCrackMe2.go:75 */
+      while (lVar4 < 5) {
+                /* /app/src/GoCrackMe2/GoCrackMe2.go:92 */
+        *(undefined8 *)((long)register0x00000020 + -0x228) = uVar7;
+        *(undefined8 *)((long)register0x00000020 + -0x1d0) = uVar5;
+                /* /app/src/GoCrackMe2/GoCrackMe2.go:90 */
+        *(long *)((long)register0x00000020 + -0x230) = lVar4;
+                /* /app/src/GoCrackMe2/GoCrackMe2.go:91 */
+        *(undefined8 *)((long)register0x00000020 + -0x290) = 0x48828f;
+        runtime.mapaccess2_fast64
+                  (&datatype.Map.map[int]string,(undefined *)((long)register0x00000020 + -0xe8),
+                   lVar4);
+        if ((char)(undefined *)((long)register0x00000020 + -0xe8) == '\0') {
+                /* /app/src/GoCrackMe2/GoCrackMe2.go:92 */
+          uVar7 = *(undefined8 *)((long)register0x00000020 + -0x228);
+          uVar5 = *(undefined8 *)((long)register0x00000020 + -0x1d0);
+                /* /app/src/GoCrackMe2/GoCrackMe2.go:91 */
+        }
+        else {
+          uVar5 = *extraout_RAX_04;
+          uVar3 = extraout_RAX_04[1];
+                /* /app/src/GoCrackMe2/GoCrackMe2.go:92 */
+          uVar7 = *(undefined8 *)((long)register0x00000020 + -0x1d0);
+          *(undefined8 *)((long)register0x00000020 + -0x290) = 0x4882bd;
+          runtime.concatstring2
+                    (0,uVar7,*(undefined8 *)((long)register0x00000020 + -0x228),uVar5,uVar3);
+          uVar5 = extraout_RAX_05;
+        }
+                /* /app/src/GoCrackMe2/GoCrackMe2.go:90 */
+        lVar4 = *(long *)((long)register0x00000020 + -0x230) + 1;
+                /* /app/src/GoCrackMe2/GoCrackMe2.go:92 */
+                /* /app/src/GoCrackMe2/GoCrackMe2.go:90 */
+      }
+                /* /app/src/GoCrackMe2/GoCrackMe2.go:96 */
+      *(undefined (*) [16])((long)register0x00000020 + -0x1c8) = in_XMM15;
+      *(undefined8 *)((long)register0x00000020 + -0x290) = 0x4882d3;
+      runtime.convTstring(uVar5,uVar7);
+      *(runtime._type **)((long)register0x00000020 + -0x1c8) = &datatype.String.string;
+      *(undefined8 *)((long)register0x00000020 + -0x1c0) = extraout_RAX_06;
+                /* /usr/local/go/src/fmt/print.go:314 */
+      *(undefined8 *)((long)register0x00000020 + -0x290) = 0x48830d;
+      fmt.Fprintln(&PTR_datatype.Interface.io.Writer_004ca1e8,DAT_005432d0,
+                   (undefined *)((long)register0x00000020 + -0x1c8),1,1);
+                /* /app/src/GoCrackMe2/GoCrackMe2.go:97 */
+      return;
+    }
+    uVar1 = puVar6[3];
+    unaff_RBX = puVar6[1];
+                /* /app/src/GoCrackMe2/GoCrackMe2.go:77 */
+    if (4 < uVar1) break;
+                /* /app/src/GoCrackMe2/GoCrackMe2.go:75 */
+    *(undefined8 *)((long)register0x00000020 + -0x10) = *puVar6;
+    *(long *)((long)register0x00000020 + -0x220) = unaff_RBX;
+    *(long *)((long)register0x00000020 + -0x1e0) = lVar4;
+    *(undefined8 **)((long)register0x00000020 + -0x18) = puVar6;
+    *(ulong *)((long)register0x00000020 + -0x1e8) = uVar1;
+                /* /app/src/GoCrackMe2/GoCrackMe2.go:77 */
+                /* /app/src/GoCrackMe2/GoCrackMe2.go:11 */
+    *(double *)((long)register0x00000020 + -0x1f0) =
+         *(double *)((long)register0x00000020 + uVar1 * 8 + -0x218) / 100.0;
+    *(undefined8 *)((long)register0x00000020 + -0x290) = 0x488196;
+    math/rand.Float64();
+                /* /app/src/GoCrackMe2/GoCrackMe2.go:80 */
+    if (extraout_XMM0_Qa < *(double *)((long)register0x00000020 + -0x1f0)) {
+                /* /app/src/GoCrackMe2/GoCrackMe2.go:16 */
+      *(undefined8 *)((long)register0x00000020 + -0x290) = 0x4881be;
+      runtime.makeslice(&datatype.Uint8.uint8,*(undefined8 *)((long)register0x00000020 + -0x220)
+                        ,*(undefined8 *)((long)register0x00000020 + -0x220));
+                /* /app/src/GoCrackMe2/GoCrackMe2.go:17 */
+      lVar4 = *(long *)((long)register0x00000020 + -0x220);
+      lVar2 = *(long *)((long)register0x00000020 + -0x10);
+      for (lVar8 = 0; lVar8 < lVar4; lVar8 = lVar8 + 1) {
+                /* /app/src/GoCrackMe2/GoCrackMe2.go:17 */
+                /* /app/src/GoCrackMe2/GoCrackMe2.go:18 */
+        *(byte *)(extraout_RAX_00 + lVar8) = *(byte *)(lVar2 + lVar8) ^ 0x6d;
+                /* /app/src/GoCrackMe2/GoCrackMe2.go:17 */
+      }
+                /* /app/src/GoCrackMe2/GoCrackMe2.go:20 */
+      *(undefined8 *)((long)register0x00000020 + -0x290) = 0x4881dc;
+      runtime.slicebytetostring(0,extraout_RAX_00,lVar4);
+      *(long *)((long)register0x00000020 + -0x238) = extraout_RAX_00;
+      *(undefined8 *)((long)register0x00000020 + -0x1d8) = extraout_RAX_01;
+                /* /app/src/GoCrackMe2/GoCrackMe2.go:84 */
+      *(undefined8 *)((long)register0x00000020 + -0x290) = 0x488205;
+      runtime.mapassign_fast64
+                (&datatype.Map.map[int]string,(undefined *)((long)register0x00000020 + -0xe8),
+                 *(undefined8 *)((long)register0x00000020 + -0x1e8));
+      extraout_RAX_02[1] = *(undefined8 *)((long)register0x00000020 + -0x238);
+      if (DAT_005a3170 == 0) {
+        uVar7 = *(undefined8 *)((long)register0x00000020 + -0x1d8);
+        puVar6 = extraout_RAX_02;
+      }
+      else {
+        *(undefined8 *)((long)register0x00000020 + -0x290) = 0x488227;
+        runtime.gcWriteBarrier2();
+        uVar7 = *(undefined8 *)((long)register0x00000020 + -0x1d8);
+        *in_R11 = uVar7;
+        in_R11[1] = *extraout_RAX_03;
+        puVar6 = extraout_RAX_03;
+      }
+      *puVar6 = uVar7;
+    }
+puVar6 = (undefined8 *)(*(long *)((long)register0x00000020 + -0x18) + 0x20);
+lVar4 = *(long *)((long)register0x00000020 + -0x1e0) + 1;
+}
+```
+
+You will see a few register values that already contain segments of the flag if you do the 
+conversions. However, there is a new hex string that has not been seen yet in the ecx register.
 
 ```bash
-$rdx   : 0x000000c00018ad06  →  0x5e5f09590e0b5a58
-$rsp   : 0x000000c00018acc0  →  0x180589de37d6a9ab
-0x000000c00010ace8│+0x0028: 0x5b545d0e095cba68
-0x000000c00010acf0│+0x0030: 0x5a555d585a0b5b5b
-0x000000c00010acf8│+0x0038: 0x5c585a5d545e0b55
+gef➤  
+Continuing.
+
+Thread 1 "GoCrackMe2" hit Breakpoint 4, 0x000000000048812f in ?? ()
+
+───────────────────────────────────────────────────────────────────────────────────── registers ────
+$rax   : 0x3               
+$rbx   : 0x0               
+$rcx   : 0x000000c00011ef10  →  0x000000c00011ecea  →  0x5b5b5b545d0e095c
+$rdx   : 0x000000c00012c000  →  0x000000000000025b
+$rsp   : 0x000000c00011ecc0  →  0x0000000000494f40  →   or BYTE PTR [rax], al
+$rbp   : 0x000000c00011ef40  →  0x000000c00011efd0  →  0x0000000000000000
+$rsi   : 0x25b             
+$rdi   : 0x766ad44cfd155af9
+$rip   : 0x000000000048812f  →   inc rax
+$r8    : 0x000000c00011ed90  →  0x000000000000c88e
+$r9    : 0x1               
+$r10   : 0x0               
+$r11   : 0x000000c00011ed90  →  0x000000000000c88e
+$r12   : 0x000000c000126030  →  0x0000007b67616c66 ("flag{"?)
+$r13   : 0x0               
+$r14   : 0x000000c0000061c0  →  0x000000c00011e000  →  0x000000c00011f000  →  0x000000c000120000  →  0x000000c000121000  →  0x0000000000000000
+$r15   : 0x3               
+$eflags: [zero carry parity adjust sign trap INTERRUPT direction overflow resume virtualx86 identification]
+$cs: 0x33 $ss: 0x2b $ds: 0x00 $es: 0x00 $fs: 0x00 $gs: 0x00 
+───────────────────────────────────────────────────────────────────────────────────────── stack ────
+0x000000c00011ecc0│+0x0000: 0x0000000000494f40  →   or BYTE PTR [rax], al	 ← $rsp
+0x000000c00011ecc8│+0x0008: 0x000000c00011ee60  →  0x0000000000000002
+0x000000c00011ecd0│+0x0010: 0x0000000000000000
+0x000000c00011ecd8│+0x0018: 0x000000c00011ed60  →  0x0000000000000001
+0x000000c00011ece0│+0x0020: 0x000000000040d6fb  →   mov rax, QWORD PTR [rsp+0x30]
+0x000000c00011ece8│+0x0028: 0x5b545d0e095cba68
+0x000000c00011ecf0│+0x0030: 0x5a555d585a0b5b5b
+0x000000c00011ecf8│+0x0038: 0x5c585a5d545e0b55
+─────────────────────────────────────────────────────────────────────────────────── code:x86:64 ────
+     0x48811b                  mov    rcx, QWORD PTR [rsp+0x270]
+     0x488123                  add    rcx, 0x20
+     0x488127                  mov    rax, QWORD PTR [rsp+0xa8]
+●→   0x48812f                  inc    rax
+     0x488132                  cmp    rax, 0x5
+     0x488136                  jge    0x488245
+     0x48813c                  mov    rdx, QWORD PTR [rcx+0x18]
+     0x488140                  mov    rbx, QWORD PTR [rcx+0x8]
+     0x488144                  mov    rsi, QWORD PTR [rcx]
+────────────────────────────────────────────────────────────────────────────────────────────────────
 ```
+
+From what has already been seen, the flag is a combination of strings produced at random so it would
+make sense that if this new hex string is the final key to the flag, we can find the permutations and
+guess a result. This is the downside of not having a standard flag format and was addressed by the 
+creators post competition.
+
+Go ahead and run this script and try out the strings .... or .... see the flag below ...:
 
 ```python
 hex_values = [
     0x5b545d0e095cba68,
     0x5a555d585a0b5b5b,
     0x5c585a5d545e0b55,
-    0x5e5f09590e0b5a58,
-    0x180589de37d6a9ab,
+    0x5b5b5b545d0e095c,
 ]
 
 def process_hex_values(hex_values):
@@ -401,3 +567,32 @@ for idx, values in enumerate(resulting_values):
     print("".join(values)[::-1]) #reverse for little endian
 ```
 
+Now generate the permutations:
+
+```python
+from itertools import permutations
+
+def generate_combinations(values):
+    if len(values) != 4:
+        raise ValueError("needs 4 string values.")
+
+    combinations = list(permutations(values))
+
+    return ["".join(comb) for comb in combinations]
+
+values = ["57fc4d2324", "f750878", "f390751", "1dc09666"]
+combinations = generate_combinations(values)
+print("Combinations:")
+for comb in combinations:
+    print(comb)
+```
+
+flag{f75087857fc4d23241dc09666f390751}
+
+
+## Conclusion
+
+This challenge was challenging to say the least but I learned a great deal about ghidra that has 
+shored up my confidence in reversing other binaries and doing general debugging. The analyzer
+was invaluable to get a grasp of program flow so shout out to those creators. I hope you enjoyed 
+the walkthrough and found it helpful!
